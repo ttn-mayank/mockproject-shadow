@@ -1,0 +1,35 @@
+
+<sly data-sly-use.model="com.ttn.bootcamp.amc.mockproject.core.models.publishedblogs.BlogListModel"></sly>
+
+<sly data-sly-test="${!model.blogList}">
+    <h3>Configure published blog list component</h3>
+</sly>
+
+
+    <sly data-sly-list="${model.blogList @ begin=0, end= model.value}">
+        <div class="container" style="margin:10px;">
+        <div class="row m-2">
+            <div class="card flex-md-row mb-4 shadow-sm h-md-1200">
+                <div class="card-body d-flex flex-column align-items-start">
+                    <div class="container">
+                        <div class="col-lg-9">
+                            <strong class="d-inline-block mb-2 text-primary">${item.tag}</strong>
+                            <h3 class="mb-0">
+                                <a class="text-dark" href="${item.tabsLinkitem}">${item.mainTitle}</a>
+                            </h3>
+                            <div class="mb-1 text-muted">${item.date}</div>
+                            <p class="card-text mb-auto">${item.content}</p>
+                            <a href="${item.tabsLinkitem}">${item.tabsButtonText}</a>
+                        </div>
+                        <div class="col-lg-3" style="margin-left:0px">
+                            <img class="card-img-right" data-src="holder.js/200x250?theme=thumb" alt="Card image cap">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        </div>
+    </sly>
+
+

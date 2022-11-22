@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workspaceFilter version="1.0">
+    <filter root="/apps/mockproject/clientlibs"/>
+    <filter root="/apps/mockproject/components"/>
+    <filter root="/apps/mockproject/i18n"/>
+</workspaceFilter>

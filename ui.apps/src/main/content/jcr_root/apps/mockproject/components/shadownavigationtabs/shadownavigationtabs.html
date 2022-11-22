@@ -1,0 +1,26 @@
+<sly data-sly-use.model="com.ttn.bootcamp.amc.mockproject.core.models.shadow.navigationtabs.NavigationTabModel"></sly>
+<sly data-sly-test="${!model.logo}">
+    Configure this
+</sly>
+
+    <div class="container-fluid">
+        <div class="container" style="text-align:center">
+
+            <div class="row flex-nowrap justify-content-between align-items-center">
+                <div class="col-12 text-center">
+                    <a class="blog-header-logo text-dark" href="${model.logolink}">
+                        <img src="${model.logo}" class="ttn-logo">
+                    </a>
+                </div>
+            </div>
+
+           <sly data-sly-test="${model.navPageList}">
+               <div class="container" style="text-align:center">
+                           <ul style="list-style-type:none;" data-sly-list.key="${model.navPageList}">
+                               <li><a target="" style="color:black" href="${model.navPageList[key]}">${key}</a></li><hr/>
+                           </ul>
+               </div>
+           </sly>
+
+        </div>
+    </div>

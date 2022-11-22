@@ -1,0 +1,10 @@
+<sly data-sly-use.model="com.ttn.bootcamp.amc.mockproject.core.models.shadow.header.HeaderModel"></sly>
+
+<header>
+    <div class="container-fluid" style="background-color:${model.bgColor@ context='styleToken'};">
+        <div class="container p-3" style="display:inline">
+            <h2 style="float:left">${currentPage.parent.title}</h2>
+            <h3 style="float:right">${model.userName}</h3>
+        </div>
+    </div>
+</header>

@@ -1,0 +1,10 @@
+
+
+<sly data-sly-use.model="${'com.ttn.bootcamp.amc.mockproject.core.models.blogs.BlogsModel'}"></sly>
+
+<sly data-sly-test="${!model.content}">
+    <h3>Configure Content</h3>
+</sly>
+<div class="">
+    ${model.content @ context='unsafe'}
+</div>

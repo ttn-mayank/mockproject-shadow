@@ -1,0 +1,32 @@
+
+<sly data-sly-use.model="com.ttn.bootcamp.amc.mockproject.core.models.homepage.bloglist.BlogListModel"></sly>
+
+<div class="container">
+<div class="row mb-2">
+
+
+    <sly data-sly-test="${!model.blogList}">
+        <h1>Configure This Component</h1>
+    </sly>
+
+    <sly data-sly-list="${model.blogList}">
+
+        <div class="col-md-4">
+            <div class="card flex-md-row mb-4 shadow-sm h-md-400">
+                <div class="card-body d-flex flex-column align-items-start">
+                    <img class="card-img-right flex-auto d-none d-lg-block" src="${item.linkimage}" alt="Card image cap">
+                    <div><strong class="d-inline-block mb-2 text-success">${item.tag}</strong></div>
+
+                    <h3 class="mb-0">
+                        <a class="text-dark" href="${item.tabsLinkitem}">${item.mainTitle}</a>
+                    </h3>
+                    <div class="mb-1 text-muted">${item.date}</div>
+                    <p class="card-text mb-auto">${item.content}</p>
+                    <a href="${item.tabsLinkitem}">${item.tabsButtonText}</a>
+                </div>
+            </div>
+        </div>
+    </sly>
+
+</div>
+</div>

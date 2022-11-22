@@ -1,0 +1,16 @@
+<sly data-sly-use.model="com.ttn.bootcamp.amc.mockproject.core.models.shadow.Footer.FooterModel"></sly>
+
+<sly data-sly-test="${!model.blockList}">
+    Configure this
+</sly>
+<div class="row">
+    <div class="container">
+        <sly data-sly-list="${model.blockList}">
+        <div class="col-lg-2">
+            <ul style="list-style-type:none;" data-sly-list.child="${item.itemList}">
+                <li><a target="${child.isExternal=='on' ? '_blank' : ''}" style="color:black" href="${child.navlink}">${child.navlabel}</a></li>
+            </ul>
+        </div>
+        </sly>
+    </div>
+</div>

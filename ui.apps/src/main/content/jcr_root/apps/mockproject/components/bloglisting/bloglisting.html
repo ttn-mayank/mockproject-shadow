@@ -1,0 +1,12 @@
+
+<sly data-sly-use.model="com.ttn.bootcamp.amc.mockproject.core.models.blogs.BlogListingModel"></sly>
+
+<div class="">
+    <h4 class="font-italic">Archives</h4>
+    <sly data-sly-test="${model.pagelist}" data-sly-list="${model.pagelist}">
+    <ol class="list-unstyled mb-0">
+        <li><a href="${item.navlink}">${item.navlabel}</a></li>
+    </ol>
+    </sly>
+</div>
+
