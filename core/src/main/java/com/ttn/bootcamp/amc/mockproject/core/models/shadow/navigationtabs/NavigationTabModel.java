@@ -46,20 +46,22 @@ public class NavigationTabModel {
 
         navLink = new ArrayList<String>();
         navPageList = new HashMap<String,String>();
-        Resource resource = resourceResolver.getResource("/content/mockproject/us/blogs");
-        Iterator<Resource> children = resource.listChildren();
-        PageManager pageManager = resourceResolver.adaptTo(PageManager.class);
+        if(logolink != "") {
+            Resource resource = resourceResolver.getResource(logolink);
+            Iterator<Resource> children = resource.listChildren();
+            PageManager pageManager = resourceResolver.adaptTo(PageManager.class);
 
-        while(children.hasNext()){
-            Resource child = children.next();
-            String path = child.getPath();
-            Page rootPage = pageManager.getPage(path);
+            while (children.hasNext()) {
+                Resource child = children.next();
+                String path = child.getPath();
+                Page rootPage = pageManager.getPage(path);
 
-            if(rootPage != null){
-                //navLink.add(rootPage.getName());
-                navPageList.put(rootPage.getName(),rootPage.getPath());
+                if (rootPage != null) {
+                    //navLink.add(rootPage.getName());
+                    navPageList.put(rootPage.getName(), rootPage.getPath());
+                }
+
             }
-
         }
     }
 
