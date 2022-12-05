@@ -94,8 +94,6 @@ public class NavigationTabModel {
 
 
                     String hide = rootPage.getProperties().get("hidenav", String.class);
-
-
                     if(flag>0 && hide == null){
                         navPageList.put(rootPage.getName(), rootPage.getPath());
                     }
