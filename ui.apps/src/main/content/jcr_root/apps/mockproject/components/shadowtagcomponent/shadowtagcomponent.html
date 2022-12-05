@@ -1,0 +1,14 @@
+
+
+<sly data-sly-use.model="${'com.ttn.bootcamp.amc.mockproject.core.models.shadow.TagComponentModel'}"></sly>
+
+<sly data-sly-test="${!model.path}">
+    <h3>Configure Content</h3>
+</sly>
+<div class="">
+    <h5>Related Pages</h5>
+    <ul style="list-style-type:none;" data-sly-list.key="${model.navPageList}">
+        <li><a target="" style="color:black" href="${model.navPageList[key]}">${key}</a></li>
+    </ul>
+
+</div>

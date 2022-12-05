@@ -2,6 +2,9 @@ package com.ttn.bootcamp.amc.mockproject.core.models.shadow.navigationtabs;
 
 import com.day.cq.wcm.api.Page;
 import com.day.cq.wcm.api.PageManager;
+import org.apache.jackrabbit.api.security.user.Group;
+import org.apache.jackrabbit.api.security.user.User;
+import org.apache.jackrabbit.api.security.user.UserManager;
 import org.apache.jackrabbit.vault.util.JcrConstants;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.api.resource.ResourceResolver;
@@ -14,6 +17,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.annotation.PostConstruct;
+import javax.jcr.RepositoryException;
+import javax.jcr.Session;
 import java.util.*;
 
 @Model(adaptables = {Resource.class},defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL)
@@ -40,16 +45,27 @@ public class NavigationTabModel {
 
     @SlingObject
     private ResourceResolver resourceResolver;
-
+    private Iterator<Group> groupIterator;
     @PostConstruct
     protected void init() {
 
+        final Session session = resourceResolver.adaptTo(Session.class);
+        final String userId = session.getUserID();
+
+        final UserManager userManager = resourceResolver.adaptTo(UserManager.class);
+        try {
+            final User user = (User) userManager.getAuthorizable(userId);
+            groupIterator = user.memberOf();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
         navLink = new ArrayList<String>();
         navPageList = new HashMap<String,String>();
         if(logolink != "") {
             Resource resource = resourceResolver.getResource(logolink);
             Iterator<Resource> children = resource.listChildren();
             PageManager pageManager = resourceResolver.adaptTo(PageManager.class);
+
 
             while (children.hasNext()) {
                 Resource child = children.next();
@@ -58,11 +74,38 @@ public class NavigationTabModel {
 
                 if (rootPage != null) {
                     //navLink.add(rootPage.getName());
-                    navPageList.put(rootPage.getName(), rootPage.getPath());
+                    String[] grpx = rootPage.getProperties().get("dropdown", String[].class);
+                    int flag=0;
+
+                    if(grpx == null) {
+                        flag++;
+                    }else{
+                        while (groupIterator.hasNext()) {
+
+                            try {
+                                if (Arrays.asList(grpx).contains(groupIterator.next().getID())) {
+                                    flag++;
+                                }
+                            } catch (RepositoryException e) {
+                                throw new RuntimeException(e);
+                            }
+                        }
+                    }
+
+
+                    String hide = rootPage.getProperties().get("hidenav", String.class);
+
+
+                    if(flag>0 && hide == null){
+                        navPageList.put(rootPage.getName(), rootPage.getPath());
+                    }
+
                 }
 
             }
         }
+
+
     }
 
 
